@@ -37,23 +37,26 @@ const pokemonList = document.getElementById('pokemonList')
 
 
 // Usado geralmente para um callback ou um contexto mais isolado, é uma sintaxe mais reduzida.
-fetch(url)
-    .then((response) => response.json())
-    .then((jsonBody) => jsonBody.results)
-    .then((pokemons) => {
+// função MAP ajuda a manipular lista dentro do JS. Transforma um elmento em outro. Forma menos verbosa de executar o código abaixo:
+
+pokeApi.getPokemons().then((pokemons = []) => {
+
+    const newList = pokemons.map((pokemon) => {
+        return pokemon.name
+    })
+
+    console.log(newList)
+
+        const listItens = []
+
         for (let i = 0; i < pokemons.length; i++) {
             const pokemon = pokemons[i];
-            console.log()
-            pokemonList.innerHTML += convertPokemonToLi(pokemon)
-
-
-            
+            listItens.push(convertPokemonToLi(pokemon)) 
+            debugger
+            console.log(listItens)
         }
-    })
-    .catch((error) => console.log(error))
-    .finally(() => console.log('Requisição conluida'))
-
-    
+    })  
+    // Com isso estou convertendo a lista de pokemons onde se fazia uma busca de cada vez em um elemente de HTML completo onde ele faz uma unica leitura.
 
     // O resultado é o mesmo da execução abaixo porém menos verboso e mais limpo.
 
@@ -72,4 +75,3 @@ fetch(url)
 //     .finally(function () {
 //         console.log('Requisição conluida')
 // })
-
