@@ -13,24 +13,25 @@ const offset = 0
 const limit = 10
 const url = `https://pokeapi.co/api/v2/pokemon?pokemon?offset=${offset}&limit=${limit}`
 
+
 function convertPokemonToLi(pokemon) {
     return `
-    <li class="pokemon">
-                <span class="number">#001</span>
+    <li class="pokemon ${pokemon.type}">
+                <span class="number">#${pokemon.number}</span>
                 <span class="name">${pokemon.name}</span>
 
                 <div class="detail">
                     <ol class="types">
-                        <li class="type">grass</li>
-                        <li class="type">poison</li>
+                       ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
 
                     </ol>
 
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="${pokemon.name}">
+                    <img src="${pokemon.photo}"
+                    alt="${pokemon.name}">
                 </div>
                 
             </li>
-            `
+          `  
 }
 
 const pokemonList = document.getElementById('pokemonList')
@@ -41,20 +42,8 @@ const pokemonList = document.getElementById('pokemonList')
 
 pokeApi.getPokemons().then((pokemons = []) => {
 
-    const newList = pokemons.map((pokemon) => {
-        return pokemon.name
-    })
-
-    console.log(newList)
-
-        const listItens = []
-
-        for (let i = 0; i < pokemons.length; i++) {
-            const pokemon = pokemons[i];
-            listItens.push(convertPokemonToLi(pokemon)) 
-            debugger
-            console.log(listItens)
-        }
+    const newHtml = pokemons.map(convertPokemonToLi).join('')
+    pokemonList.innerHTML = newHtml
     })  
     // Com isso estou convertendo a lista de pokemons onde se fazia uma busca de cada vez em um elemente de HTML completo onde ele faz uma unica leitura.
 
