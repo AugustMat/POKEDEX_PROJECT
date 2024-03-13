@@ -1,6 +1,9 @@
 
+
+
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
+const pokeCard = document.getElementById('pokemon')
 
 const maxRecords = 151
 const limit = 12
@@ -45,4 +48,8 @@ loadMoreButton.addEventListener('click', () => {
     } else {
         loadPokemonItens(offset, limit)
     }
+})
+
+pokeCard.addEventListener('click', () => {
+
 })
