@@ -41,7 +41,7 @@ loadMoreButton.addEventListener('click', () => {
     if (nextPageRecords >= maxRecords) {
         const newLimit = maxRecords - offset
         loadPokemonItens(offset, newLimit)
-        loadMoreButton.innerText = 'Novo nome'
+        loadMoreButton.innerText = 'No more pages for now =D'
     } else {
         loadPokemonItens(offset, limit)
     }
