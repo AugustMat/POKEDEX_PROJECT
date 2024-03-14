@@ -3,7 +3,7 @@
 
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
-const pokeCard = document.getElementById('pokemon')
+
 
 const maxRecords = 151
 const limit = 12
@@ -50,6 +50,28 @@ loadMoreButton.addEventListener('click', () => {
     }
 })
 
-pokeCard.addEventListener('click', () => {
+// pokeCard.addEventListener('click', () => {
 
-})
+// })
+
+document.addEventListener('DOMContentLoaded', function() {
+    var listaItems = document.querySelectorAll('#pokemonList, .pokemon')
+  
+    listaItems.forEach(function(pokemon) {
+        pokemon.addEventListener('click', function() {
+        listaItems.forEach(function(pokemon) {`
+        .pokemon{
+            
+        }`
+            ;
+        });
+        this.classList.add('editing');
+        var textoAtual = this.textContent;
+        var novoTexto = prompt('Editar item:', textoAtual);
+        if (novoTexto !== null) {
+          this.textContent = novoTexto;
+        }
+        this.classList.remove('editing');
+      });
+    });
+  });
