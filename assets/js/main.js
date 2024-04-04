@@ -71,9 +71,9 @@ pokeApi.convertDetails = (pokemon) => {
     return pokemonDetail
 }
 
-let viewDetails = (idPoke) => {
+let viewDetails = (idPoke) =>{
     const modalPoke = document.querySelector('.modalPoke')
-    if(modalPoke) { // Se existir o modal, ele ira tirar quando o usuario clicar no botao novamente
+    if(modalPoke){ // Se existir o modal, ele ira tirar quando o usuario clicar no botao novamente
         modalPoke.remove()
     }
 
@@ -94,80 +94,80 @@ pokeApi.viewDetails = (pokemon) => {
     pokemon.height = pokemon.height / 10
 
     return `
-        <section class="modalPoke ${typeColor}">
-            <div class="header">
-                <span class="number">#${pokemon.number}</span>
-                <h1 class="namePoke">${pokemon.name}</h1>
-            </div>
+    <section class="modalPoke ${typeColor}">
+        <div class="header">
+            <span class="number">#${pokemon.order}</span>
+            <h1 class="namePoke">${pokemon.name}</h1>
+        </div>
 
-            <div class="image">
-                <img class="imagePoke" src="${pokemon.photo}" alt="${pokemon.name}">
-            </div>
+        <div class="image">
+            <img class="imagePoke" src="${pokemon.photo}" alt="${pokemon.name}">
+        </div>
 
-            <div class="detailsAndPower">
-                <div class="detailsBox">
-                    <h2 class="detailsTitle">
-                        Details
-                    </h2>
-                    
-                    <div class="detailsWidth">
-                        <span class="detailText ${typeColor}" id="width">
-                            ${pokemon.height} M
-                        </span>
-                        <span class="detailText ${typeColor}" id="height">
-                            ${pokemon.weight} KG
-                        </span>
-                    </div>
-                </div>
-
-                <div class="types">
-                    <h2>
-                        Powers Pokemon
-                    </h2>
-                    <ul class="typesList">
-                        ${viewPower(pokemon.types)}
-                    </ul>
+        <div class="deitalsAndPower">
+            <div class="detailsBox">
+                <h2 class="detailsTitle">
+                    Details
+                </h2>
+                
+                <div class="detailsWidth">
+                    <span class="detailText ${typeColor}" id="width">
+                        ${pokemon.height} M
+                    </span>
+                    <span class="detailText ${typeColor}" id="height">
+                        ${pokemon.weight} KG
+                    </span>
                 </div>
             </div>
 
-
-            <div class="statusPoke">
-                <h1 class="namePoke">
-                    Status ${pokemon.name}
-                </h1>
-                ${viewStatus(pokemon.status)}
+            <div class="types">
+                <h2>
+                    Powers Pokemon
+                </h2>
+                <ul class="typesList">
+                    ${viewPower(pokemon.types)}
+                </ul>
             </div>
-            
-    `, function fecharModal() {
-        const modal = document.querySelector('.modalPoke.show');
-        if (modal) {
-            modal.classList.remove('show');
-            modal.remove();
-            document.removeEventListener('keydown', fecharComEsc);
-            document.removeEventListener('click', fecharClicandoFora);
-        }
-    }
+        </div>
 
-    function fecharComEsc(event) {
-        if (event.key === 'Escape') {
-            fecharModal();
-        }
-    }
 
-    function fecharClicandoFora(event) {
-        const modal = document.querySelector('.modalPoke.show');
-        if (modal && event.target === modal) {
-            fecharModal();
-        }
+        <div class="statusPoke">
+            <h1 class="namePoke">
+                Status ${pokemon.name}
+            </h1>
+            ${viewStatus(pokemon.status)}
+        </div>
+        
+
+        <div class="buttonRemove">
+            <button onclick="removePokeDetails()" class="btnRemove">
+                Sair
+            </button>
+        </div>
+    </section>
+`
+
+}
+
+// Adicionar ouvintes de evento para fechar o modal
+document.addEventListener('keydown', fecharComEsc);
+document.addEventListener('click', fecharModal);
+
+// Função para fechar o modal
+function fecharModal() {
+    const modal = document.querySelector('.modalPoke');
+    if (modal) {
+        modal.remove();
+    } 
+}
+
+function fecharComEsc(event) {
+    if (event.key === 'Escape') {
+        fecharModal();
     }
 }
 
-// let removePokeDetails = () => { // Remove modal
-//     const modalPoke = document.querySelector('.modalPoke')
-//     modalPoke.remove()
-// }
-
-let viewStatus = (statusPoke) => { // View status poke
+let viewStatus = (statusPoke) => { 
     return statusPoke.map((statusI) => {
         const valueStatus = statusI.base_stat
         const nameStatus = statusI.stat.name
@@ -180,7 +180,7 @@ let viewStatus = (statusPoke) => { // View status poke
     }).join('')
 }
 
-let viewPower = (typePokemon) => { // View powers poke
+let viewPower = (typePokemon) => {
     return typePokemon.map((typePoke) => {
         const typeName = typePoke.type.name;
         return `
