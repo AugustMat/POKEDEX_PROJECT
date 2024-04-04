@@ -137,13 +137,6 @@ pokeApi.viewDetails = (pokemon) => {
             </h1>
             ${viewStatus(pokemon.status)}
         </div>
-        
-
-        <div class="buttonRemove">
-            <button onclick="removePokeDetails()" class="btnRemove">
-                Sair
-            </button>
-        </div>
     </section>
 `
 
